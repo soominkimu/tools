@@ -55,7 +55,8 @@ if [ -d $DEST0 ]; then
       DEST=$DEST0/P/$p
     fi
     let COUNTER=COUNTER+1
-    print "${COUNTER})${GREEN}~/D/P/${RED}${p}${GREEN}/build/ ${NC} -> ${YELLOW}${DEST}/${NC}"
+    printf "%2d) " $COUNTER
+    print "${GREEN}~/D/P/${RED}${p}${GREEN}/build/${NC} -> ${YELLOW}${DEST}/${NC}"
     rsync -r --exclude='.*' --delete ~/D/P/$p/build/ $DEST/
   done
 else
