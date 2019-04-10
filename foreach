@@ -36,6 +36,7 @@ PJT=(
   "be-starmap"
   "be-scrape"
   "be-fileserver"
+  "be-tools"
 )
 
 COUNTER=0
