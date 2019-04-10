@@ -1,0 +1,63 @@
+#!/bin/zsh
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+DATE=`date +"Date : %a %m/%d/%Y"`
+TIME=`date +"Time : %H.%M.%S"`
+print "${YELLOW}${DATE} ${GREEN}${TIME}${NC}"
+
+PJT=(
+  "spacetimeq-labs"
+  "artmoon"
+  "cal-heatmap"
+  "eglobe"
+  "heatmap-tokyo"
+  "jp-map-vid"
+  "planet-earth"
+  "sq3d-demo"
+  "sq3d-polygon"
+  "stq-prototype"
+  "weeklywomen"
+)
+
+if [ "$#" -gt 0 ]; then
+  print "${RED}No Build${NC}"
+else
+  for p in "${PJT[@]}"; do
+    cd ~/D/P/${p}
+    if [ $p = "weeklywomen" ]; then
+      BUILDER='grunt'
+    else
+      BUILDER='yarn'
+    fi
+    print "# ${GREEN}$PWD/${BLUE}${BUILDER} build${NC}"
+    ${BUILDER} build
+  done
+  cd ..
+fi
+
+DEST0=~/D/GHP/soominkimu.github.io
+if [ -d $DEST0 ]; then
+
+  PJT+=(
+    "modeling-cal"
+    "sq-architect"
+  )
+
+  print "${GREEN}rsync ${BLUE}-r --exclude='.*' --delete ${GREEN}FROM ${YELLOW}TO${NC}"
+  COUNTER=0
+  for p in "${PJT[@]}"; do
+    if [ $p = "spacetimeq-labs" ]; then
+      DEST=$DEST0
+    else
+      DEST=$DEST0/P/$p
+    fi
+    let COUNTER=COUNTER+1
+    print "${COUNTER})${GREEN}~/D/P/${RED}${p}${GREEN}/build/ ${NC} -> ${YELLOW}${DEST}/${NC}"
+    rsync -r --exclude='.*' --delete ~/D/P/$p/build/ $DEST/
+  done
+else
+  print "${RED}Directory ${DEST0} does not exist!${NC}"
+fi

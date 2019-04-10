@@ -1,0 +1,64 @@
+#!/bin/zsh
+# ForEach, run command (from arguments) for each project
+# foreach   # list all projects
+# foreach git status
+# foreach git --no-pager lol
+# foreach git add -A
+CBLACK='\33[30m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+CREDBG='\33[41m'
+CGREENBG='\33[42m'
+CYELLOWBG='\33[43m'
+CWHITEBG='\33[47m'
+NC='\033[0m'
+DATE=`date +"Date : %a %m/%d/%Y"`
+TIME=`date +"Time : %H.%M.%S"`
+print "Provided command in the arguments: ${CBLACK}${CYELLOWBG}$@${NC}"
+print "${YELLOW}${DATE} ${GREEN}${TIME}${NC}"
+PJT=(
+  "spacetimeq-labs"
+  "artmoon"
+  "cal-heatmap"
+  "eglobe"
+  "heatmap-tokyo"
+  "jp-map-vid"
+  "planet-earth"
+  "sq3d-demo"
+  "sq3d-polygon"
+  "stq-prototype"
+  "weeklywomen"
+  "modeling-cal"
+  "sq-architect"
+  "be-csv2json"
+  "be-starmap"
+  "be-scrape"
+  "be-fileserver"
+)
+
+COUNTER=0
+for p in "${PJT[@]}"; do
+  cd ~/D/P/${p}
+  let COUNTER=COUNTER+1
+  printf "######### %02d)" $COUNTER
+  if [ -d .git ]; then
+    if [[ $p == be-* ]]; then
+      printf " ${CBLACK}${CWHITEBG}%-16s${NC}" $p
+      print " ${NC}$PWD/${BLUE}$@${NC}"
+    else
+      printf " ${CBLACK}${CGREENBG}%-16s${NC}" $p
+      print " ${GREEN}$PWD/${BLUE}$@${NC}"
+    fi
+    $@
+  else
+    printf " ${CBLACK}${CYELLOWBG}%-16s${NC}" $p
+    print " ${BLUE}$PWD/${NC}"
+    if [ "$#" -gt 0 ]; then
+      ls -la build/*
+    fi
+  fi
+done
+
+cd ..

@@ -1,0 +1,12 @@
+#!/bin/zsh
+RED='\033[0;32m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+DATE=`date +"Date : %a %m/%d/%Y"`
+TIME=`date +"Time : %H.%M.%S"`
+print "${YELLOW}${DATE} ${GREEN}${TIME}${NC}"
+
+print "${BLUE}rsync -ruth --progress --exclude=node_modules --exclude=build ${NC}~/D/P/ ${YELLOW}~/D/Backup/P/${NC}"
+rsync -ruth --progress --exclude='node_modules' --exclude='build' ~/D/P/ ~/D/Backup/P/
