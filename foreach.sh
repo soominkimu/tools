@@ -4,16 +4,16 @@
 # foreach git status
 # foreach git --no-pager lol
 # foreach git add -A
-CBLACK='\33[30m'
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-YELLOW='\033[0;33m'
-CREDBG='\33[41m'
-CGREENBG='\33[42m'
-CYELLOWBG='\33[43m'
-CWHITEBG='\33[47m'
-NC='\033[0m'
+CBLACK='\e[30m'
+RED='\e[0;31m'
+GREEN='\e[0;32m'
+BLUE='\e[0;34m'
+YELLOW='\e[0;33m'
+CREDBG='\e[41m'
+CGREENBG='\e[42m'
+CYELLOWBG='\e[43m'
+CWHITEBG='\e[47m'
+NC='\e[0m'
 DATE=`date +"Date : %a %m/%d/%Y"`
 TIME=`date +"Time : %H.%M.%S"`
 print "Provided command in the arguments: ${CBLACK}${CYELLOWBG}$@${NC}"
