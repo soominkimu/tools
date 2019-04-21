@@ -1,7 +1,7 @@
 #!/bin/zsh
 # ForEach, run command (from arguments) for each project
 # foreach   # list all projects
-# foreach git status
+# foreach git status --short
 # foreach git --no-pager lol
 # foreach git add -A
 CBLACK='\e[30m'

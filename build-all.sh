@@ -59,6 +59,7 @@ if [ -d $DEST0 ]; then
     print "${GREEN}~/D/P/${RED}${p}${GREEN}/build/${NC} -> ${YELLOW}${DEST}/${NC}"
     rsync -r --exclude='.*' --delete ~/D/P/$p/build/ $DEST/
   done
+  rsync -r --exclude='.*' --delete ~/D/P/spacetimeq-labs/public/images/ $DEST0/images/
   cp ~/D/P/be-fileserver/data/weather-*.json $DEST0/data/
   cp ~/D/P/be-csv2json/dataJSON/M_tokyo-Avg.json $DEST0/data/
 else
